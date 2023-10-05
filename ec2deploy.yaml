@@ -1,0 +1,23 @@
+name: Deploy to EC2 and build
+on:
+  push:
+    branches:
+      - main
+env:
+  AWS_REGION: <"us-east-1">
+  AWS_PRIVATE:KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          role-to-assume: ...
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+      - name: STS GetCallerIdentity
+        run: |
+          aws sts get-caller-identity
