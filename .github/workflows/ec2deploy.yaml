@@ -22,7 +22,7 @@ jobs:
           aws sts get-caller-identity
       - name: cd backend
         run: |
-          cd ~/website/backend
+          cd /home/ec2-user/website/backend
       - name: Pull repository
         run: | 
           git pull
