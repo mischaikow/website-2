@@ -20,9 +20,12 @@ jobs:
       - name: STS GetCallerIdentity
         run: |
           aws sts get-caller-identity
-      - name: touch
+      - name: clean 
         run: |
-          touch find_this_file_3j244.txt
+          rm find_this_file_3j244.txt
+      - name: EC2 Connect
+        run: |
+          aws ec2-instance-connect ssh --instance-id i-03c0a5504af2c0cff
       - name: Pull repository
         run: | 
           cd /home/ec2-user/website/backend
