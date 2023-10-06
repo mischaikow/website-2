@@ -23,4 +23,4 @@ jobs:
             --instance-ids "i-03c0a5504af2c0cff" \
             --document-name "AWS-RunShellScript" \
             --parameters commands='bash /home/ec2-user/website/build_run_docker.sh' \
-            --detail
+            --details
