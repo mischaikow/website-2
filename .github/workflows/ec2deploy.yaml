@@ -20,3 +20,12 @@ jobs:
       - name: STS GetCallerIdentity
         run: |
           aws sts get-caller-identity
+      - name: Build backend Docker
+        run: |
+          docker buildx build -t site/backend -f backend/Dockerfile https://github.com/mischaikow/website 
+      - name: Stop backend Docker
+        run: |
+          docker stop mischaikow-backend
+      - name: Run backend Docker
+        run: |
+          docker run -rm -d -p 5000:5000 --name mischaikow-backend --init site/backend
