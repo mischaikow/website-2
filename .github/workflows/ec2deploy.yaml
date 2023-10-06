@@ -17,25 +17,9 @@ jobs:
           role-to-assume: arn:aws:iam::662775645668:role/mischaikow-com-github-access
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: us-east-1
-      - name: STS GetCallerIdentity
-        run: |
-          aws sts get-caller-identity
       - name: EC2 Connect
         run: |
           aws ec2-instance-connect ssh --instance-id i-03c0a5504af2c0cff
-      - name: Pull repository
+      - name: Pull & build repository
         run: | 
-          cd /home/ec2-user/website/backend
-          git pull
-      - name: Update node_modules
-        run: |
-          npm install
-      - name: Build backend Docker
-        run: |
-          docker buildx build --no-cache -t site/backend -f Dockerfile .
-      - name: Stop backend Docker
-        run: |
-          docker stop mischaikow-backend
-      - name: Run backend Docker
-        run: |
-          docker run --rm -d -p 5000:5000 --name mischaikow-backend --init site/backend
+          bash build_run_docker.sh
