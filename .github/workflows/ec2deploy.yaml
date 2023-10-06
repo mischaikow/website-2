@@ -20,9 +20,18 @@ jobs:
       - name: STS GetCallerIdentity
         run: |
           aws sts get-caller-identity
+      - name: cd backend
+        run: |
+          cd ~/website/backend
+      - name: Pull repository
+        run: | 
+          git pull
+      - name: Update node_modules
+        run: |
+          npm install
       - name: Build backend Docker
         run: |
-          docker buildx build --no-cache -t site/backend -f backend/Dockerfile https://github.com/mischaikow/website 
+          docker buildx build --no-cache -t site/backend -f Dockerfile .
       - name: Stop backend Docker
         run: |
           docker stop mischaikow-backend
