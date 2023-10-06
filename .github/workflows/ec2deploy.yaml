@@ -17,9 +17,10 @@ jobs:
           role-to-assume: arn:aws:iam::662775645668:role/mischaikow-com-github-access
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: us-east-1
-      - name: EC2 Connect
-        run: |
-          aws ec2-instance-connect ssh --instance-id i-03c0a5504af2c0cff
       - name: Pull & build repository
         run: | 
-          bash build_run_docker.sh
+          aws ssm send-command \
+            --instance-ids "i-03c0a5504af2c0cff" \
+            --document-name "AWS-RunShellScript" \
+            --parameters commands='bash /home/ec2-user/website/build_run_docker.sh' \
+            --detail
