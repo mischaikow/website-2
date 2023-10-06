@@ -20,9 +20,12 @@ jobs:
       - name: STS GetCallerIdentity
         run: |
           aws sts get-caller-identity
+      - name: touch
+        run: |
+          touch find_this_file_3j244.txt
       - name: Pull repository
         run: | 
-          sudo cd /home/ec2-user/website/backend
+          cd /home/ec2-user/website/backend
           git pull
       - name: Update node_modules
         run: |
