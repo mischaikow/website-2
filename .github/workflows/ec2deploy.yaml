@@ -24,15 +24,13 @@ jobs:
             --instance-ids 'i-03c0a5504af2c0cff' \
             --document-name 'AWS-RunShellScript' \
             --parameters commands='bash /home/ec2-user/website/build_run_docker.sh' \
-            --query 'Command.CommandId' --output text)" >> "$GITHUB_OUTPUT"
+            --query 'Command.CommandId' --output text)" >> "$GITHUB_ENV"
       - name: Wait...
         run: sleep 45s
       - name: Print Results
-        env:
-          COMMAND_REF: ${{ steps.repo-build.outputs.CMDID }}
         run: |
           aws ssm list-command-invocations \
-            --command-id $COMMAND_REF \\
+            --command-id ${{ env.CMDID }} \\
             --details \
             --query 'CommandInvocations[*].CommandPlugins[*].Output[]' \
             --output text
