@@ -30,7 +30,7 @@ jobs:
       - name: Print Results
         run: |
           aws ssm list-command-invocations \
-            --command-id ${{ CMDID }} \\
+            --command-id ${{ env.CMDID }} \\
             --details \
             --query 'CommandInvocations[*].CommandPlugins[*].Output[]' \
             --output text
