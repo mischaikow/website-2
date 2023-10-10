@@ -18,18 +18,18 @@ jobs:
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: us-east-1
       - name: Pull & build repository
-        id: repo_build
+        id: repo-build
         run: | 
-          echo "CMDID = $(aws ssm send-command \
+          echo "CMDID=$(aws ssm send-command \
             --instance-ids 'i-03c0a5504af2c0cff' \
             --document-name 'AWS-RunShellScript' \
             --parameters commands='bash /home/ec2-user/website/build_run_docker.sh' \
-            --query 'Command.CommandId' --output text)" >> $GITHUB_OUTPUT
+            --query 'Command.CommandId' --output text)" >> "$GITHUB_OUTPUT"
       - name: Wait...
         run: sleep 45s
       - name: Print Results
         env:
-          COMMAND_REF: ${{ steps.repo_build.outputs.CMDID }}
+          COMMAND_REF: ${{ steps.repo-build.outputs.CMDID }}
         run: |
           aws ssm list-command-invocations \
             --command-id $COMMAND_REF \\
