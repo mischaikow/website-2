@@ -12,4 +12,5 @@ dt=$(date '+%d/%m/%Y %H:%M:%S')
 echo 'Script Completed' $dt 
 
 unset dt
+sleep 5s
 curl http://127.0.0.1:5000
