@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "Vollkorn";
+  src: url("https://fonts.googleapis.com/css2?family=Vollkorn:400");
+}
+
+body {
+  font-family: "Vollkorn", "times", serif;
+  font-weight: 300;
+}
+
+h1 {
+  text-align: center;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.frontpage-list {
+  text-align: center;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 5px;
+  font-size: 17px;
+}
+
+.inline-image {
+  height: 11.5px;
+  position: relative;
+  top: 0.5px;
+}
+
+.inline-download {
+  height: 30px;
+  position: relative;
+  top: -5px;
+  margin: -15px;
+}
+
+nav {
+  background-color: green;
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  font-size: 20px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  margin-left: 25px;
+  font-size: 12px;
+}
