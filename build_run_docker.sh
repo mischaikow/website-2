@@ -14,7 +14,7 @@ docker run --rm -d -p 5000:5000 --name mischaikow-backend --init site/backend
 sleep 5s
 backend=curl http://127.0.0.1:5000
 dt=$(date '+%d/%m/%Y %H:%M:%S')
-if [ $backend == 'Backend is up' ]
+if [ $backend == 'Backend is up']
 then
     echo 'Backend up and running' $dt
 else
