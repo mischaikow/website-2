@@ -3,13 +3,15 @@
   src: url("https://fonts.googleapis.com/css2?family=Vollkorn:400");
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 body {
   font-family: "Vollkorn", "times", serif;
   font-weight: 300;
-}
-
-h1 {
-  text-align: center;
 }
 
 a {
@@ -18,25 +20,30 @@ a {
 }
 
 .frontpage-list {
-  text-align: center;
-  margin-top: 40px;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 40 auto;
   border-spacing: 5px;
   font-size: 17px;
+  list-style: none;
 }
 
-.inline-image {
+.inline-linkedin {
   height: 11.5px;
   position: relative;
   top: 0.5px;
 }
 
-.inline-download {
-  height: 30px;
+.inline-github {
+  height: 12.5px;
   position: relative;
-  top: -5px;
-  margin: -15px;
+  top: 0.5px;
+}
+
+.inline-download {
+  height: 15px;
+  position: relative;
+  top: 1.5px;
 }
 
 nav {
