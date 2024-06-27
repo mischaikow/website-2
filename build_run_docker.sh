@@ -13,7 +13,7 @@ docker buildx build --no-cache -t site/backend -f Dockerfile .
 docker stop mischaikow-backend
 docker run --rm -d -p 5000:5000 --network=mischaikow-home --name mischaikow-backend --init site/backend
 
-sleep 10s
+sleep 12s
 backend=curl http://127.0.0.1:5000
 dt=$(date '+%d/%m/%Y %H:%M:%S')
 if [ $backend == 'Backend is up']
@@ -29,7 +29,7 @@ docker buildx build --no-cache -t site/frontend -f Dockerfile .
 docker stop mischaikow-frontend
 docker run --rm -d -p 4173:4173 --network=mischaikow-home --name mischaikow-frontend --init site/frontend
 
-sleep 10s
+sleep 12s
 frontend=$(curl -o /dev/null -s -w "%{http_code}\n" -I http://127.0.0.1:4173)
 dt=$(date '+%d/%m/%Y %H:%M:%S')
 if [ "$frontend" -eq 200 ]
