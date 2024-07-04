@@ -4,8 +4,7 @@ services:
     command: sh -c "certbot certonly --standalone -d mischaikow.com --text --agree-tos --email mischaik@gmail.com --server https://acme-v02.api.letsencrypt.org/directory --rsa-key-size 4096 --verbose --keep-until-expiring --preferred-challenges=http"
     container_name: certbot
     volumes:
-      - ./nginx/certbot:/etc/letsencrypt
-      - ./nginx/certbot-data:/var/lib/letsencrypt
+      - "letsencrypt:/etc/letsencrypt"
 
 volumes:
   letsencrypt:
