@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:1.24.0-alpine-slim
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certbot:/etc/letsencrypt
+      - ./nginx/certbot-data:/var/lib/letsencrypt
+    networks:
+      - mischaikow-home
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./nginx/certbot:/etc/letsencrypt
+      - ./nginx/certbot-data:/var/lib/letsencrypt
+    entrypoint: /bin/sh -c 'trap exit TERM; while :; docker-compose run --rm certbot renew; sleep 23h & wait $${!}; done;'
+    networks:
+      - mischaikow-home
