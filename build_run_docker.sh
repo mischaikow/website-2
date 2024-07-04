@@ -46,7 +46,7 @@ cd /home/ec2-user/website/nginx
 docker buildx build --no-cache -t site/nginx -f Dockerfile .
 docker stop mischaikow-nginx
 docker run --rm -d -p 80:80 -p 443:443 \
-    --mount 'type=volume,src=./nginx/certbot,dst=/etc/letsencrypt' -mount 'type=volume,src=./nginx/certbot-data,dst=/var/lib/letsencrypt' \
+    --mount 'type=volume,src=letsencrypt_keys,dst=/etc/letsencrypt' \
     --network=mischaikow-home --name mischaikow-nginx --init site/nginx
 
 sleep 10s

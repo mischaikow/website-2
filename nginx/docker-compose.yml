@@ -6,3 +6,7 @@ services:
     volumes:
       - ./nginx/certbot:/etc/letsencrypt
       - ./nginx/certbot-data:/var/lib/letsencrypt
+
+volumes:
+  letsencrypt:
+    name: letsencrypt_keys
