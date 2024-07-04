@@ -11,7 +11,8 @@ echo 'Building and deploying backend'
 cd /home/ec2-user/website/backend
 docker buildx build --no-cache -t site/backend -f Dockerfile .
 docker stop mischaikow-backend
-docker run --rm -d -p 5000:5000 --network=mischaikow-home --name mischaikow-backend --init site/backend
+docker run --rm -d -p 5000:5000 \
+    --network=mischaikow-home --name mischaikow-backend --init site/backend
 
 sleep 12s
 backend=curl http://127.0.0.1:5000
@@ -27,7 +28,8 @@ echo 'Building and deploying frontend'
 cd /home/ec2-user/website/frontend
 docker buildx build --no-cache -t site/frontend -f Dockerfile .
 docker stop mischaikow-frontend
-docker run --rm -d -p 4173:4173 --network=mischaikow-home --name mischaikow-frontend --init site/frontend
+docker run --rm -d -p 4173:4173 \
+    --network=mischaikow-home --name mischaikow-frontend --init site/frontend
 
 sleep 12s
 frontend=$(curl -o /dev/null -s -w "%{http_code}\n" -I http://127.0.0.1:4173)
@@ -43,7 +45,9 @@ echo 'Building and deploying reverse proxy'
 cd /home/ec2-user/website/nginx
 docker buildx build --no-cache -t site/nginx -f Dockerfile .
 docker stop mischaikow-nginx
-docker run --rm -d -p 80:80 -p 443:443 --network=mischaikow-home --name mischaikow-nginx --init site/nginx
+docker run --rm -d -p 80:80 -p 443:443 \
+    -v ./nginx/certbot:/etc/letsencrypt -v ./nginx/certbot-data:/var/lib/letsencrypt \
+    --network=mischaikow-home --name mischaikow-nginx --init site/nginx
 
 sleep 10s
 dt=$(date '+%d/%m/%Y %H:%M:%S')
